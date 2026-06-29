@@ -1,0 +1,34 @@
+{
+  "entities": {
+    "EncryptedMessage": {
+      "title": "EncryptedMessage",
+      "description": "An end-to-end encrypted message.",
+      "type": "object",
+      "properties": {
+        "content": {
+          "type": "string",
+          "description": "The base64 encoded encrypted message content."
+        },
+        "iv": {
+          "type": "string",
+          "description": "The initialization vector used for encryption (base64)."
+        },
+        "senderId": {
+          "type": "string",
+          "description": "The Supabase user ID of the sender."
+        },
+        "createdAt": {
+          "type": "number",
+          "description": "Server timestamp of when the message was sent."
+        }
+      },
+      "required": ["content", "iv", "senderId", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/messages/{messageId}": {
+      "schema": { "$ref": "#/entities/EncryptedMessage" },
+      "description": "Stores all end-to-end encrypted messages."
+    }
+  }
+}

@@ -1,0 +1,34 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Global Safety Net
+    match /{document=**} { 
+      allow read, write: if false; 
+    }
+
+    function isValidId(id) { 
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$'); 
+    }
+    
+    function incoming() { return request.resource.data; }
+    
+    function isValidEncryptedMessage(data) {
+      return data.keys().hasAll(['content', 'iv', 'senderId', 'createdAt']) &&
+             data.keys().size() == 4 &&
+             data.content is string && data.content.size() > 0 && data.content.size() <= 100000 &&
+             data.iv is string && data.iv.size() > 0 && data.iv.size() <= 200 &&
+             data.senderId is string && data.senderId.size() > 0 && data.senderId.size() <= 128 &&
+             data.createdAt == request.time;
+    }
+
+    match /messages/{messageId} {
+      allow read: if true; // In E2EE, anyone can read, but only with the key can they decrypt
+      
+      allow create: if isValidId(messageId) && isValidEncryptedMessage(incoming());
+      
+      // Messages are immutable once sent
+      allow update: if false;
+      allow delete: if false;
+    }
+  }
+}

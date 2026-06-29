@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: dendrite-matrix-backend
+    env: docker
+    plan: free
+    healthCheckPath: /_matrix/client/versions
+    envVars:
+      - key: SERVER_NAME
+        value: your-render-app.onrender.com
+      - key: SUPABASE_DB_URL
+        sync: false
+      - key: REGISTRATION_SECRET
+        generateValue: true
