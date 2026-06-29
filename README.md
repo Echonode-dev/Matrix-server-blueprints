@@ -1,12 +1,6 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://ai.google.dev/static/site-assets/images/share-ais-513315318.png" />
-</div>
+# Dendrite Matrix Homeserver
 
-# Run and deploy your AI Studio app
-
-This contains everything you need to run your app locally.
-
-View your app in AI Studio: https://ai.studio/apps/06f6e0bd-d496-4ab8-9495-475b82786a43
+This repository contains a Dendrite Matrix Homeserver implementation.
 
 ## Run Locally
 
