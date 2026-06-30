@@ -14,6 +14,12 @@ if [ ! -f /etc/dendrite/matrix_key.pem ]; then
   fi
 fi
 
+echo "Injecting environment variables into config..."
+# Replace the placeholder text with actual environment variable values
+sed -i "s|\${SERVER_NAME}|$SERVER_NAME|g" /etc/dendrite/dendrite.yaml
+sed -i "s|\${SUPABASE_DB_URL}|$SUPABASE_DB_URL|g" /etc/dendrite/dendrite.yaml
+sed -i "s|\${REGISTRATION_SECRET}|$REGISTRATION_SECRET|g" /etc/dendrite/dendrite.yaml
+
 echo "Starting Dendrite Matrix Homeserver..."
 # Dendrite versions vary on binary naming. Try common ones.
 if command -v dendrite-monolith-server >/dev/null 2>&1; then
