@@ -4,8 +4,7 @@ export default function App() {
     client_compatibility: ["Element X", "Element Web"],
     architecture: {
       deployment: "Render (Docker Monolith)",
-      primary_database: "Supabase (PostgreSQL) - Required by Dendrite",
-      secondary_database: "Firebase (Optional Auxiliary Storage)"
+      primary_database: "Supabase (PostgreSQL) - Required by Dendrite"
     },
     instructions: [
       "1. Push this repository to GitHub.",
