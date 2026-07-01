@@ -1,4 +1,4 @@
-#!/sh
+#!/bin/sh
 set -e
 
 # Lock the Go Engine to container limits to stop 40-second CPU freezes
